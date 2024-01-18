@@ -320,58 +320,57 @@ static uint16_t held_shift = 0;
 #ifdef RGBLIGHT_ENABLE
 //  Now define the array of layers. Later layers take precedence
 
-// QWERTY,
-// Light on inner column and underglow
 const rgblight_segment_t PROGMEM layer_qwerty_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_RED));
-
+const rgblight_segment_t PROGMEM layer_colemak_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE));
 const rgblight_segment_t PROGMEM layer_colemakdh_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_PINK));
-
-// _NUM,
-// Light on outer column and underglow
-const rgblight_segment_t PROGMEM layer_num_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_TEAL));
-// _SYMBOL,
-// Light on inner column and underglow
-const rgblight_segment_t PROGMEM layer_symbol_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GOLD));
+const rgblight_segment_t PROGMEM layer_dvorak_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CHARTREUSE));
+const rgblight_segment_t PROGMEM layer_workman_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_SPRINGGREEN));
+const rgblight_segment_t PROGMEM layer_lower_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CYAN));
+const rgblight_segment_t PROGMEM layer_raise_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_BLUE));
-
-// _COMMAND,
-// Light on inner column and underglow
-const rgblight_segment_t PROGMEM layer_command_lights[] =
+const rgblight_segment_t PROGMEM layer_adjust_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_PURPLE));
-
-//_NUMPAD
+const rgblight_segment_t PROGMEM layer_switch_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA));
 const rgblight_segment_t PROGMEM layer_numpad_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE), SET_NUMPAD(HSV_BLUE));
-
-// _SWITCHER
-const rgblight_segment_t PROGMEM layer_switcher_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN));
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CORAL), SET_NUMPAD(HSV_CORAL));
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
     RGBLIGHT_LAYERS_LIST(
 
-        layer_qwerty_lights,
-        layer_num_lights, // overrides layer 1
-        layer_symbol_lights, layer_command_lights,
-        layer_switcher_lights, // Overrides other layers
-        layer_numpad_lights, layer_colemakdh_lights);
+        layer_qwerty_lights, layer_colemak_lights, layer_colemakdh_lights,
+        layer_dvorak_lights, layer_workman_lights, layer_lower_lights,
+        layer_raise_lights, layer_adjust_lights, layer_switch_lights,
+        layer_numpad_lights);
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(
         0, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _QWERTY));
     rgblight_set_layer_state(
-        7, layer_state_cmp(state, _DEFAULTS) &&
+        1, layer_state_cmp(state, _DEFAULTS) &&
+               layer_state_cmp(default_layer_state, _COLEMAK));
+    rgblight_set_layer_state(
+        2, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _COLEMAKDH));
+    rgblight_set_layer_state(
+        3, layer_state_cmp(state, _DEFAULTS) &&
+               layer_state_cmp(default_layer_state, _DVORAK));
+    rgblight_set_layer_state(
+        4, layer_state_cmp(state, _DEFAULTS) &&
+               layer_state_cmp(default_layer_state, _WORKMAN));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(7, layer_state_cmp(state, _ADJUST));
+    rgblight_set_layer_state(8, layer_state_cmp(state, _SWITCH));
+    rgblight_set_layer_state(9, layer_state_cmp(state, _NUMPAD));
 
-    rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
-    rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
-    rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
-    rgblight_set_layer_state(4, layer_state_cmp(state, _SWITCH));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _NUMPAD));
     return state;
 }
 
@@ -380,9 +379,6 @@ uint8_t mod_state;
 void keyboard_post_init_user(void) {
     // Enable the LED layers
     rgblight_layers = my_rgb_layers;
-
-    rgblight_mode(
-        10); // haven't found a way to set this in a more useful way
 }
 #endif
 
@@ -396,10 +392,10 @@ bool oled_task_user(void) {
     /* Use MASTER_LEFT and MASTER_RIGHT such that the key map for the left
      * side is always on the left, and the same for the right. */
 #    ifdef MASTER_LEFT
-    char buf1[2] = "A";
-    char buf2[2] = "G";
-    char buf3[2] = " ";
-    char buf4[2] = " ";
+    char  buf1[2]   = "A";
+    char  buf2[2]   = "G";
+    char  buf3[2]   = " ";
+    char  buf4[2]   = " ";
     led_t usb_state = host_keyboard_led_state();
 
     if (keymap_config.swap_lalt_lgui) {
@@ -532,16 +528,10 @@ bool oled_task_user(void) {
 #        ifdef RGBLIGHT_ENABLE
     if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
         snprintf(bufm, sizeof(bufm), "%2d", rgblight_get_mode());
-    }
-    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
         snprintf(bufh, sizeof(bufh), "%2d",
                  rgblight_get_hue() / RGBLIGHT_HUE_STEP);
-    }
-    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
         snprintf(bufs, sizeof(bufs), "%2d",
                  rgblight_get_sat() / RGBLIGHT_SAT_STEP);
-    }
-    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
         snprintf(bufv, sizeof(bufv), "%2d",
                  rgblight_get_val() / RGBLIGHT_VAL_STEP);
     }
@@ -659,7 +649,7 @@ bool oled_task_user(void) {
         default:
             break;
     }
-#    endif     /* MASTER_RIGHT */
+#    endif /* MASTER_RIGHT */
     return false;
 }
 

@@ -39,10 +39,6 @@
 #endif
 #define ENCODER_DIRECTION_FLIP
 
-#define RGBLIGHT_SLEEP
-//
-#define RGBLIGHT_LAYERS
-
 /* ws2812 RGB LED */
 #define WS2812_DI_PIN D3
 
@@ -56,34 +52,36 @@
 #define RGBLED_NUM \
     RGB_INDICATOR + RGB_DROP + RGB_PER_KEY // Number of LEDs per half
 
-#ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_LED_COUNT RGBLED_NUM
-#endif
-
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_EFFECT_BREATHING
-#    define RGBLIGHT_EFFECT_RAINBOW_MOOD
-#    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
-#    define RGBLIGHT_EFFECT_SNAKE
-#    define RGBLIGHT_EFFECT_KNIGHT
-#    define RGBLIGHT_EFFECT_CHRISTMAS
-#    define RGBLIGHT_EFFECT_STATIC_GRADIENT
-#    define RGBLIGHT_EFFECT_RGB_TEST
-#    define RGBLIGHT_EFFECT_ALTERNATING
-#    define RGBLIGHT_EFFECT_TWINKLE
+#    define RGBLIGHT_LED_MAP                                              \
+        {                                                                 \
+            0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 7, 18, 19, \
+                20, 21, 22, 23, 24, 25, 16, 17, 28, 29, 30, 31, 32, 33,   \
+                34, 35, 26, 27                                            \
+        }
 
-#    define RGBLED_SPLIT           \
-        {                          \
-            RGBLED_NUM, RGBLED_NUM \
-        } // haven't figured out how to use this yet
+#    define RGBLIGHT_LAYERS
+#    define RGBLIGHT_MAX_LAYERS 10
+#    define RGBLED_SPLIT \
+        { RGBLED_NUM, RGBLED_NUM }
 
 #    define RGBLIGHT_LIMIT_VAL 120
-#    define RGBLIGHT_HUE_STEP 10
-#    define RGBLIGHT_SAT_STEP 17
-#    define RGBLIGHT_VAL_STEP 17
+#    define RGBLIGHT_SPLIT
+
+#    define RGBLIGHT_EFFECT_ALTERNATING
+#    define RGBLIGHT_EFFECT_BREATHING
+#    define RGBLIGHT_EFFECT_CHRISTMAS
+#    define RGBLIGHT_EFFECT_KNIGHT
+#    define RGBLIGHT_EFFECT_RAINBOW_MOOD
+#    define RGBLIGHT_EFFECT_RAINBOW_SWIRL
+#    define RGBLIGHT_EFFECT_RGB_TEST
+#    define RGBLIGHT_EFFECT_SNAKE
+#    define RGBLIGHT_EFFECT_STATIC_GRADIENT
+#    define RGBLIGHT_EFFECT_TWINKLE
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
+#    define RGB_MATRIX_LED_COUNT RGBLED_NUM
 #    define RGB_MATRIX_KEYPRESSES          // reacts to keypresses
 #    define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when
                                            // suspended
