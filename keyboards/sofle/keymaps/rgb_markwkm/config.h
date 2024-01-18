@@ -16,6 +16,8 @@
 #pragma once
 
 // #define USE_MATRIX_I2C
+#define SPLIT_LAYER_STATE_ENABLE
+#define SPLIT_OLED_ENABLE
 
 /* Select hand configuration */
 
