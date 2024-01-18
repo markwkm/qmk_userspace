@@ -388,179 +388,336 @@ void keyboard_post_init_user(void) {
 
 #ifdef OLED_ENABLE
 
-#ifdef LOGO
+#    ifdef LOGO
 static void render_logo(void) {
     static const char PROGMEM raw_logo[] = {
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0xe0, 0xc0, 0xc0, 0x80, 0x80, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0x00, 0x00, 0x00, 0x00,
-0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x03, 0x0f, 0x3c, 0x70, 0xc0, 0x80, 0x80, 0xc0, 0x60,
-0x70, 0x30, 0x18, 0x18, 0x0c, 0x0c, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x01, 0x8d, 0xd9, 0x79, 0x31, 0xf1, 0x79, 0x69, 0xcd, 0xc1,
-0xc1, 0xc1, 0xf9, 0x19, 0x31, 0xb1, 0x63, 0x63, 0x7a, 0x06, 0x06, 0x02,
-0x00, 0x01, 0x07, 0x1c, 0x18, 0xfc, 0xfe, 0x06, 0x06, 0xfe, 0x06, 0x06,
-0xfe, 0xfc, 0x00, 0xff, 0x00, 0x00, 0xf8, 0x18, 0xff, 0x18, 0x18, 0x18,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80,
-0xe0, 0x78, 0x1c, 0x0f, 0x03, 0x03, 0x06, 0x0c, 0x18, 0x18, 0x30, 0x20,
-0x60, 0x60, 0xff, 0x03, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0xfe, 0xff,
-0x01, 0x30, 0x30, 0xff, 0x30, 0x30, 0xff, 0x38, 0x30, 0xfe, 0xfe, 0x30,
-0x30, 0xff, 0x30, 0x30, 0xfe, 0x30, 0x30, 0x30, 0x00, 0x00, 0x80, 0xe0,
-0x60, 0x7f, 0xff, 0xc1, 0xc1, 0xff, 0xc1, 0xc1, 0xff, 0x7f, 0x01, 0xff,
-0x00, 0x00, 0x3f, 0x30, 0xff, 0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07, 0x01, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x00, 0x00, 0x00, 0x07,
-0x00, 0x00, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03, 0x03, 0x07, 0x03, 0x03,
-0x03, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07, 0x01, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00,
-0x03, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
-0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    };
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xc0, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0, 0xc0, 0xc0,
+        0x80, 0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xe0,
+        0x80, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0xe0, 0x00, 0x00, 0x00, 0x00, 0x80, 0x80, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x03, 0x0f, 0x3c, 0x70, 0xc0, 0x80, 0x80,
+        0xc0, 0x60, 0x70, 0x30, 0x18, 0x18, 0x0c, 0x0c, 0xff, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x8d, 0xd9, 0x79, 0x31, 0xf1,
+        0x79, 0x69, 0xcd, 0xc1, 0xc1, 0xc1, 0xf9, 0x19, 0x31, 0xb1, 0x63,
+        0x63, 0x7a, 0x06, 0x06, 0x02, 0x00, 0x01, 0x07, 0x1c, 0x18, 0xfc,
+        0xfe, 0x06, 0x06, 0xfe, 0x06, 0x06, 0xfe, 0xfc, 0x00, 0xff, 0x00,
+        0x00, 0xf8, 0x18, 0xff, 0x18, 0x18, 0x18, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x80, 0xe0, 0x78, 0x1c, 0x0f, 0x03, 0x03, 0x06, 0x0c, 0x18, 0x18,
+        0x30, 0x20, 0x60, 0x60, 0xff, 0x03, 0x01, 0x01, 0x01, 0x01, 0x00,
+        0x00, 0xfe, 0xff, 0x01, 0x30, 0x30, 0xff, 0x30, 0x30, 0xff, 0x38,
+        0x30, 0xfe, 0xfe, 0x30, 0x30, 0xff, 0x30, 0x30, 0xfe, 0x30, 0x30,
+        0x30, 0x00, 0x00, 0x80, 0xe0, 0x60, 0x7f, 0xff, 0xc1, 0xc1, 0xff,
+        0xc1, 0xc1, 0xff, 0x7f, 0x01, 0xff, 0x00, 0x00, 0x3f, 0x30, 0xff,
+        0x30, 0x30, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07, 0x01, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x07, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x07, 0x07, 0x00,
+        0x00, 0x00, 0x07, 0x00, 0x00, 0x03, 0x00, 0x00, 0x01, 0x03, 0x03,
+        0x03, 0x07, 0x03, 0x03, 0x03, 0x00, 0x00, 0x00, 0x00, 0x06, 0x07,
+        0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x03, 0x02, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     oled_write_raw_P(raw_logo, sizeof(raw_logo));
 }
-#endif /* LOGO */
-
-/*
- * Remember that much of the status isn't transmitted to the controller over
- * TRRS.
- */
-static void print_status_narrow(void) {
-    led_t usb_state = host_keyboard_led_state();
-
-    // Print current mode
-    switch (get_highest_layer(default_layer_state)) {
-        case _QWERTY:
-            oled_write_ln_P(PSTR("Qwrt"), false);
-            break;
-        case _COLEMAK:
-            oled_write_ln_P(PSTR("Clmk"), false);
-            break;
-        case _COLEMAKDH:
-            oled_write_ln_P(PSTR("CmDH"), false);
-            break;
-        case _DVORAK:
-            oled_write_ln_P(PSTR("Dvrk"), false);
-            break;
-        case _WORKMAN:
-            oled_write_ln_P(PSTR("WrkM"), false);
-            break;
-        default:
-            oled_write_ln_P(PSTR("Undef"), false);
-    }
-    oled_write_P(PSTR("\n\n"), false);
-    // Print current layer
-    oled_write_ln_P(PSTR("LAYER"), false);
-    switch (get_highest_layer(layer_state)) {
-        case _QWERTY:
-        case _COLEMAK:
-        case _COLEMAKDH:
-        case _DVORAK:
-        case _WORKMAN:
-            oled_write_P(PSTR("Base\n"), false);
-            break;
-        case _RAISE:
-            oled_write_P(PSTR("Raise"), false);
-            break;
-        case _LOWER:
-            oled_write_P(PSTR("Lower"), false);
-            break;
-        case _ADJUST:
-            oled_write_P(PSTR("Adj\n"), false);
-            break;
-        case _SWITCH:
-            oled_write_P(PSTR("Swit\n"), false);
-            break;
-        case _NUMPAD:
-            oled_write_P(PSTR("Nump\n"), false);
-            break;
-        default:
-            oled_write_ln_P(PSTR("Undef"), false);
-    }
-
-    oled_write_P(PSTR("\n"), false);
-#    ifdef RGBLIGHT_ENABLE
-    // Print LED information
-    char buf[3];
-    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
-        oled_write("M:", false);
-        snprintf(buf, sizeof(buf), "%d", rgblight_get_mode());
-        oled_write(buf, false);
-        oled_write("\nH:", false);
-        snprintf(buf, sizeof(buf), "%d",
-                 rgblight_get_hue() / RGBLIGHT_HUE_STEP);
-        oled_write(buf, false);
-        oled_write("\nS:", false);
-        snprintf(buf, sizeof(buf), "%d",
-                 rgblight_get_sat() / RGBLIGHT_SAT_STEP);
-        oled_write(buf, false);
-        oled_write("\nV:", false);
-        snprintf(buf, sizeof(buf), "%d",
-                 rgblight_get_val() / RGBLIGHT_VAL_STEP);
-        oled_write(buf, false);
-        oled_write_P(PSTR("\n"), false);
-    }
-#    endif
-
-    oled_write_P(PSTR("\n"), false);
-    if (usb_state.caps_lock)
-        oled_write_P(PSTR("CAPS"), false);
-    else
-        oled_write_P(PSTR("    "), false);
-    oled_write_P(PSTR("\n"), false);
-    if (usb_state.num_lock)
-        oled_write_P(PSTR("NUM"), false);
-    else
-        oled_write_P(PSTR("   "), false);
-    oled_write_P(PSTR("\n"), false);
-    if (usb_state.scroll_lock)
-        oled_write_P(PSTR("SCLK"), false);
-    else
-        oled_write_P(PSTR("    "), false);
-    oled_write_P(PSTR("\n"), false);
-
-    if (keymap_config.swap_lalt_lgui == false) {
-        oled_write_P(PSTR("norm"), false);
-    } else {
-        oled_write_P(PSTR("swap"), false);
-    }
-}
+#    endif /* LOGO */
 
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
-    if (is_keyboard_master()) {
-        return OLED_ROTATION_270;
-    }
     return rotation;
 }
 
 bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        print_status_narrow();
-    } else {
-#    ifdef LOGO
-        render_logo();
-#    else
-        oled_write_ln_P(PSTR("Sofle RGB"), false);
-#    endif /* defined LOGO */
+    /* Use MASTER_LEFT and MASTER_RIGHT such that the key map for the left
+     * side is always on the left, and the same for the right. */
+#    ifdef MASTER_LEFT
+    char buf1[2] = "A";
+    char buf2[2] = "G";
+    char buf3[2] = " ";
+    char buf4[2] = " ";
+    led_t usb_state = host_keyboard_led_state();
+
+    if (keymap_config.swap_lalt_lgui) {
+        buf1[0] = 'G';
+        buf2[0] = 'A';
     }
+    if (usb_state.caps_lock) buf3[0] = 'C';
+    if (usb_state.num_lock) buf4[0] = 'N';
+
+    switch (get_highest_layer(default_layer_state)) {
+        case _QWERTY:
+            /* Max line:          123456789012345678901 */
+            oled_write(buf1, false);
+            oled_write_P(PSTR("Q| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("W| ^I Q  W  E  R  T"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("E| ^H A  S  D  F  G"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("R| L2 Z  X  C  V  B"), false);
+            break;
+        case _COLEMAK:
+            oled_write(buf1, false);
+            oled_write_P(PSTR("C| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("O| ^I Q  W  F  P  B"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("L| ^H A  R  S  T  D"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("E| L2 Z  X  C  V  B"), false);
+            break;
+        case _COLEMAKDH:
+            oled_write(buf1, false);
+            oled_write_P(PSTR("C| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("O| ^I Q  W  F  P  B"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("D| ^H A  R  S  T  G"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("H| L2 Z  X  C  D  V"), false);
+            break;
+        case _DVORAK:
+            oled_write(buf1, false);
+            oled_write_P(PSTR("D| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("V| ^I '\" ,< .> P  Y"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("O| ^H A  O  E  U  I"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("R| L2 ;: Q  J  K  X"), false);
+            break;
+        case _WORKMAN:
+            oled_write(buf1, false);
+            oled_write_P(PSTR("W| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("O| ^I Q  D  R  W  B"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("R| ^H A  S  H  T  G"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("K| L2 Z  X  M  C  V"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Sofle RGB"), false);
+    }
+    switch (get_highest_layer(layer_state)) {
+        case _RAISE:
+            oled_write(buf1, false);
+            oled_write_ln_P(PSTR("R| `"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("A| `  Ho Up En"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("I| ^? Le Do Ri"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("S| L2"), false);
+            break;
+        case _LOWER:
+            oled_write(buf1, false);
+            oled_write_ln_P(PSTR("L|"), false);
+            oled_write(buf2, false);
+            oled_write_P(PSTR("O| ^[ 1! 2@ 3# 4$ 5%"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("W|"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("E| SHFT"), false);
+            break;
+        case _ADJUST:
+            oled_write(buf1, false);
+            oled_write_ln_P(PSTR("A| QW CO DH DV WO"), false);
+            oled_write(buf2, false);
+            oled_write_P(PSTR("D| RG M+ H+ S+ V+ E+"), false);
+            oled_write(buf3, false);
+            oled_write_P(PSTR("J| CL M- H- S- V- E-"), false);
+            oled_write(buf4, false);
+            oled_write_P(PSTR("U| F1 F2 F3 F4 F5 F6"), false);
+            break;
+        case _SWITCH:
+            oled_write(buf1, false);
+            oled_write_ln_P(PSTR("S|"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("W|"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("I|"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("T|"), false);
+            break;
+        case _NUMPAD:
+            oled_write(buf1, false);
+            oled_write_ln_P(PSTR("N|"), false);
+            oled_write(buf2, false);
+            oled_write_ln_P(PSTR("U|"), false);
+            oled_write(buf3, false);
+            oled_write_ln_P(PSTR("M|"), false);
+            oled_write(buf4, false);
+            oled_write_ln_P(PSTR("P|"), false);
+            break;
+        case _QWERTY:
+        case _COLEMAK:
+        case _COLEMAKDH:
+        case _DVORAK:
+        case _WORKMAN:
+        default:
+            break;
+    }
+#    endif /* MASTER_LEFT */
+#    ifdef MASTER_RIGHT
+    char bufh[3] = "  ";
+    char bufm[3] = "  ";
+    char bufs[3] = "  ";
+    char bufv[3] = "  ";
+#        ifdef RGBLIGHT_ENABLE
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
+        snprintf(bufm, sizeof(bufm), "%2d", rgblight_get_mode());
+    }
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
+        snprintf(bufh, sizeof(bufh), "%2d",
+                 rgblight_get_hue() / RGBLIGHT_HUE_STEP);
+    }
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
+        snprintf(bufs, sizeof(bufs), "%2d",
+                 rgblight_get_sat() / RGBLIGHT_SAT_STEP);
+    }
+    if (RGBLIGHT_MODES > 1 && rgblight_is_enabled()) {
+        snprintf(bufv, sizeof(bufv), "%2d",
+                 rgblight_get_val() / RGBLIGHT_VAL_STEP);
+    }
+#        endif
+#        ifdef LOGO
+    render_logo();
+#        else
+    switch (get_highest_layer(default_layer_state)) {
+        case _QWERTY:
+            oled_write(bufm, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|Y  U  I  O  P  \\|"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|H  J  K  L  ;: '\""), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|N  M  ,< .> /? L2"), false);
+            break;
+        case _COLEMAK:
+            oled_write(bufm, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|J  L  U  Y  ;: \\|"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|H  N  E  I  O  '\""), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|K  M  ,< .> /? L2"), false);
+            break;
+        case _COLEMAKDH:
+            oled_write(bufm, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|J  L  U  Y  ;  \\"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|M  N  E  I  O  '"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|K  H  ,< .> /  L2"), false);
+            break;
+        case _DVORAK:
+            oled_write(bufm, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|F  G  C  R  L  \\"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|D  H  I  N  S  /"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|B  M  W  V  Z  L2"), false);
+            break;
+        case _WORKMAN:
+            oled_write(bufm, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|J  F  U  P  ;  \\"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|Y  N  E  O  I  '"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|K  L  ,< .> /  L2"), false);
+            break;
+        default:
+            oled_write_ln_P(PSTR("Sofle RGB"), false);
+    }
+    switch (get_highest_layer(layer_state)) {
+        case _RAISE:
+            oled_write(bufm, false);
+            oled_write_ln_P(PSTR("|"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|               L2"), false);
+            break;
+        case _LOWER:
+            oled_write(bufm, false);
+            oled_write_ln_P(PSTR("|"), false);
+            oled_write(bufh, false);
+            oled_write_P(PSTR("|6^ 7& 8* 9( 0) INS"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|PU -  +  _  ="), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|PD [  ]  {  }  L2"), false);
+            break;
+        case _ADJUST:
+            oled_write(bufm, false);
+            oled_write_ln_P(PSTR("|               MU"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|MA          B+ V+"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|WI          B- V-"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|F7 F8 F9 10 11 12"), false);
+            break;
+        case _SWITCH:
+            oled_write(bufm, false);
+            oled_write_ln_P(PSTR("|"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|   WL MU WR WU"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|   ML MD MR WD"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|   B1 B3 B2"), false);
+            break;
+        case _NUMPAD:
+            oled_write(bufm, false);
+            oled_write_ln_P(PSTR("|NL 7  8  9  /"), false);
+            oled_write(bufh, false);
+            oled_write_ln_P(PSTR("|   4  5  6  *"), false);
+            oled_write(bufs, false);
+            oled_write_ln_P(PSTR("|   1  2  3  -"), false);
+            oled_write(bufv, false);
+            oled_write_ln_P(PSTR("|   0  .     +"), false);
+            break;
+        case _QWERTY:
+        case _COLEMAK:
+        case _COLEMAKDH:
+        case _DVORAK:
+        case _WORKMAN:
+        default:
+            break;
+    }
+#        endif /* defined LOGO */
+#    endif     /* MASTER_RIGHT */
     return false;
 }
 
