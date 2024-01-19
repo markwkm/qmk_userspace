@@ -249,7 +249,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* ADJUST
      * ,-----------------------------------------.                    ,-----------------------------------------.
-     * |Qwerty|Colemk|ClmkDH|Dvorak|Workmn|      |                    |      |      |      |      |      | Mute |
+     * |Qwerty|Colemk|ClmkDH|Dvorak|Workmn|      |                    |      |Plain |Breath|Rainbo|Swirl | Mute |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
      * |RGB ON| MODE | HUE+ | SAT+ | VAL+ | EFF+ |                    | Mac  |      |      |      | BL+  | Vol+ |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
@@ -262,10 +262,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'            '------''---------------------------'
      */
     [_ADJUST] = LAYOUT( \
-        KC_QWERTY, KC_COLEMAK, KC_COLEMAKDH, KC_DVORAK, KC_WORKMAN, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
-        RGB_TOG,   RGB_MOD,    RGB_HUI,      RGB_SAI,   RGB_VAI,    RGB_SPI,                      AG_NORM, XXXXXXX, XXXXXXX, XXXXXXX, BL_UP,   KC_VOLU, \
-        KC_CAPS,   RGB_RMOD,   RGB_HUD,      RGB_SAD,   RGB_VAD,    RGB_SPD,                      AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, BL_DOWN, KC_VOLD, \
-        KC_F1,     KC_F2,      KC_F3,        KC_F4,     KC_F5,      KC_F6,   KC_BTN3,    KC_BTN3, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
+        KC_QWERTY, KC_COLEMAK, KC_COLEMAKDH, KC_DVORAK, KC_WORKMAN, XXXXXXX,                      XXXXXXX, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, KC_MUTE, \
+        RGB_TOG,   RGB_MOD,    RGB_HUI,      RGB_SAI,   RGB_VAI,    RGB_SPI,                      AG_NORM, XXXXXXX, XXXXXXX, XXXXXXX, BL_UP,    KC_VOLU, \
+        KC_CAPS,   RGB_RMOD,   RGB_HUD,      RGB_SAD,   RGB_VAD,    RGB_SPD,                      AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, BL_DOWN,  KC_VOLD, \
+        KC_F1,     KC_F2,      KC_F3,        KC_F4,     KC_F5,      KC_F6,   KC_BTN3,    KC_BTN3, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,  \
                                _______,      _______,   _______,    _______, _______,    _______, _______, _______, _______, _______),
 
     /* SWITCH
@@ -532,6 +532,17 @@ bool oled_task_user(void) {
                  rgblight_get_sat() / RGBLIGHT_SAT_STEP);
         snprintf(bufv, sizeof(bufv), "%2d",
                  rgblight_get_val() / RGBLIGHT_VAL_STEP);
+    }
+#        endif
+#        ifdef RGB_MATRIX_ENABLE
+    if (rgb_matrix_is_enabled()) {
+        snprintf(bufm, sizeof(bufm), "%2d", rgb_matrix_get_mode());
+        snprintf(bufh, sizeof(bufh), "%2d",
+                 rgb_matrix_get_hue() / RGB_MATRIX_HUE_STEP);
+        snprintf(bufs, sizeof(bufs), "%2d",
+                 rgb_matrix_get_sat() / RGB_MATRIX_SAT_STEP);
+        snprintf(bufv, sizeof(bufv), "%2d",
+                 rgb_matrix_get_val() / RGB_MATRIX_VAL_STEP);
     }
 #        endif
     switch (get_highest_layer(default_layer_state)) {
