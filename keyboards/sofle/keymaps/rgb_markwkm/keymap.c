@@ -18,8 +18,6 @@
 
 #include QMK_KEYBOARD_H
 
-#define INDICATOR_BRIGHTNESS 30
-
 #define HSV_OVERRIDE_HELP(h, s, v, Override) h, s, Override
 #define HSV_OVERRIDE(hsv, Override) HSV_OVERRIDE_HELP(hsv, Override)
 
@@ -64,8 +62,8 @@
     {RGBLED_NUM + RGB_INDICATOR + RGB_DROP + 19, 2, __VA_ARGS__}
 // clang-format on
 
-#define SET_LAYER_ID(hsv) \
-    SET_INDICATORS(hsv), SET_UNDERGLOW(hsv), SET_THUMB_CLUSTER(hsv)
+#define SET_LAYER_ID(hsv) SET_INDICATORS(hsv), SET_UNDERGLOW(hsv)
+// SET_INDICATORS(hsv), SET_UNDERGLOW(hsv), SET_THUMB_CLUSTER(hsv)
 
 enum sofle_layers {
     _DEFAULTS = 0,

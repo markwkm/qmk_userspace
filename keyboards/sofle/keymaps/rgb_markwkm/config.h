@@ -15,9 +15,9 @@
  */
 #pragma once
 
-// #define USE_MATRIX_I2C
 #define SPLIT_LAYER_STATE_ENABLE
 #define SPLIT_OLED_ENABLE
+#define SPLIT_USB_DETECT
 
 /* Select hand configuration */
 
@@ -42,6 +42,8 @@
 /* ws2812 RGB LED */
 #define WS2812_DI_PIN D3
 
+#define INDICATOR_BRIGHTNESS 30
+
 /*
  * Use the number of LEDs for the values. For example, if there are no LEDs
  * installed for the indicator, set HAS_RGB_INDICATOR to 0.
@@ -49,23 +51,17 @@
 #define RGB_INDICATOR 1
 #define RGB_DROP 6
 #define RGB_PER_KEY 29
+
 #define RGBLED_NUM \
     RGB_INDICATOR + RGB_DROP + RGB_PER_KEY // Number of LEDs per half
+#define RGBLED_SPLIT \
+    { RGBLED_NUM, RGBLED_NUM }
 
 #ifdef RGBLIGHT_ENABLE
-#    define RGBLIGHT_LED_MAP                                              \
-        {                                                                 \
-            0, 1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 7, 18, 19, \
-                20, 21, 22, 23, 24, 25, 16, 17, 28, 29, 30, 31, 32, 33,   \
-                34, 35, 26, 27                                            \
-        }
-
 #    define RGBLIGHT_LAYERS
-#    define RGBLIGHT_MAX_LAYERS 10
-#    define RGBLED_SPLIT \
-        { RGBLED_NUM, RGBLED_NUM }
+#    define RGBLIGHT_MAX_LAYERS 16
 
-#    define RGBLIGHT_LIMIT_VAL 120
+#    define RGBLIGHT_LIMIT_VAL 150
 #    define RGBLIGHT_SPLIT
 
 #    define RGBLIGHT_EFFECT_ALTERNATING
@@ -81,19 +77,55 @@
 #endif
 
 #ifdef RGB_MATRIX_ENABLE
-#    define RGB_MATRIX_LED_COUNT RGBLED_NUM
-#    define RGB_MATRIX_KEYPRESSES          // reacts to keypresses
-#    define RGB_DISABLE_WHEN_USB_SUSPENDED // turn off effects when
-                                           // suspended
-#    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS \
-        150 // limits maximum brightness of LEDs to 150 out of 255. Higher
-            // may cause the controller to crash.
+#    define SPLIT_TRANSPORT_MIRROR
 
-#    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_GRADIENT_LEFT_RIGHT
+#    define RGB_MATRIX_SPLIT \
+        { RGBLED_NUM, RGBLED_NUM }
+#    undef RGBLED_NUM
+#    define RGBLED_NUM                                           \
+        RGB_INDICATOR + RGB_DROP + RGB_PER_KEY + RGB_INDICATOR + \
+            RGB_DROP + RGB_PER_KEY
+#    define RGB_MATRIX_LED_COUNT                                 \
+        RGB_INDICATOR + RGB_DROP + RGB_PER_KEY + RGB_INDICATOR + \
+            RGB_DROP + RGB_PER_KEY
+#    define DRIVER_LED_TOTAL RGB_MATRIX_LED_COUNT
+#    define RGB_MATRIX_KEYPRESSES
+#    define RGB_MATRIX_FRAMEBUFFER_EFFECTS
+// limits maximum brightness of LEDs to 150 out of 255. Higher
+// may cause the controller to crash.
+#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS 150
+
+// #    define RGB_MATRIX_DEFAULT_MODE RGB_MATRIX_GRADIENT_LEFT_RIGHT
 
 #    define RGB_MATRIX_HUE_STEP 8
 #    define RGB_MATRIX_SAT_STEP 8
 #    define RGB_MATRIX_VAL_STEP 8
 #    define RGB_MATRIX_SPD_STEP 10
+
+#    define ENABLE_RGB_MATRIX_ALPHAS_MODS
+#    define ENABLE_LED_MATRIX_BREATHING
+#    define ENABLE_LED_MATRIX_BAND
+#    define ENABLE_LED_MATRIX_BAND_PINWHEEL
+#    define ENABLE_LED_MATRIX_BAND_SPIRAL
+#    define ENABLE_LED_MATRIX_CYCLE_LEFT_RIGHT
+#    define ENABLE_LED_MATRIX_CYCLE_UP_DOWN
+#    define ENABLE_LED_MATRIX_CYCLE_OUT_IN
+#    define ENABLE_LED_MATRIX_DUAL_BEACON
+#    define ENABLE_LED_MATRIX_WAVE_LEFT_RIGHT
+#    define ENABLE_LED_MATRIX_WAVE_UP_DOWN
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_CROSS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
+#    define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
+#    define ENABLE_RGB_MATRIX_SPLASH
+#    define ENABLE_RGB_MATRIX_MULTISPLASH
+#    define ENABLE_RGB_MATRIX_SOLID_SPLASH
+#    define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+
+#    define MEDIA_KEY_DELAY 2
+#    define USB_POLLING_INTERVAL_MS 1
 #endif
