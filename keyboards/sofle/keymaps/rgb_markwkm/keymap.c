@@ -321,23 +321,23 @@ static uint16_t held_shift = 0;
 const rgblight_segment_t PROGMEM layer_qwerty_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_RED));
 const rgblight_segment_t PROGMEM layer_colemak_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_ORANGE));
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_YELLOW));
 const rgblight_segment_t PROGMEM layer_colemakdh_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GOLD));
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_TURQUOISE));
 const rgblight_segment_t PROGMEM layer_dvorak_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CHARTREUSE));
-const rgblight_segment_t PROGMEM layer_workman_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_SPRINGGREEN));
-const rgblight_segment_t PROGMEM layer_lower_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CYAN));
-const rgblight_segment_t PROGMEM layer_raise_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_BLUE));
-const rgblight_segment_t PROGMEM layer_adjust_lights[] =
+const rgblight_segment_t PROGMEM layer_workman_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_PURPLE));
-const rgblight_segment_t PROGMEM layer_switch_lights[] =
+const rgblight_segment_t PROGMEM layer_lower_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GREEN));
+const rgblight_segment_t PROGMEM layer_raise_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_TEAL));
+const rgblight_segment_t PROGMEM layer_adjust_lights[] =
     RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_MAGENTA));
+const rgblight_segment_t PROGMEM layer_switch_lights[] =
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_GOLD));
 const rgblight_segment_t PROGMEM layer_numpad_lights[] =
-    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_CORAL), SET_NUMPAD(HSV_CORAL));
+    RGBLIGHT_LAYER_SEGMENTS(SET_LAYER_ID(HSV_AZURE), SET_NUMPAD(HSV_AZURE));
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
     RGBLIGHT_LAYERS_LIST(
