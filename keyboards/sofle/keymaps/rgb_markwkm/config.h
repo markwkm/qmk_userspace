@@ -59,7 +59,7 @@
 
 #ifdef RGBLIGHT_ENABLE
 #    define RGBLIGHT_LAYERS
-#    define RGBLIGHT_MAX_LAYERS 16
+#    define RGBLIGHT_MAX_LAYERS 10
 
 #    define RGBLIGHT_LIMIT_VAL 150
 #    define RGBLIGHT_SPLIT

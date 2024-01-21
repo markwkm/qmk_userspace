@@ -249,11 +249,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     /* ADJUST
      * ,-----------------------------------------.                    ,-----------------------------------------.
-     * |Qwerty|Colemk|ClmkDH|Dvorak|Workmn|      |                    |      |Plain |Breath|Rainbo|Swirl | Mute |
+     * |Qwerty|Colemk|ClmkDH|Dvorak|Workmn|      |                    |      |      |     |       |      | Mute |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |RGB ON| MODE | HUE+ | SAT+ | VAL+ | EFF+ |                    | Mac  |      |      |      | BL+  | Vol+ |
+     * |RGB ON| MODE | HUE+ | SAT+ | VAL+ | SP+  |                    | Mac  |      |      |      | BL+  | Vol+ |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * | CAPS |RMODE | HUE- | SAT- | VAL- | EFF- |-------.    ,-------| Win  |      |      |      | BL-  | Vol- |
+     * | CAPS |RMODE | HUE- | SAT- | VAL- | SP-  |-------.    ,-------| Win  |      |      |      | BL-  | Vol- |
      * |------+------+------+------+------+------| Bttn3 |    | Bttn3 |------+------+------+------+------+------|
      * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |-------|    |-------|  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
@@ -262,32 +262,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
      *            `----------------------------------'            '------''---------------------------'
      */
     [_ADJUST] = LAYOUT( \
-        KC_QWERTY, KC_COLEMAK, KC_COLEMAKDH, KC_DVORAK, KC_WORKMAN, XXXXXXX,                      XXXXXXX, RGB_M_P, RGB_M_B, RGB_M_R, RGB_M_SW, KC_MUTE, \
-        RGB_TOG,   RGB_MOD,    RGB_HUI,      RGB_SAI,   RGB_VAI,    RGB_SPI,                      AG_NORM, XXXXXXX, XXXXXXX, XXXXXXX, BL_UP,    KC_VOLU, \
-        KC_CAPS,   RGB_RMOD,   RGB_HUD,      RGB_SAD,   RGB_VAD,    RGB_SPD,                      AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, BL_DOWN,  KC_VOLD, \
-        KC_F1,     KC_F2,      KC_F3,        KC_F4,     KC_F5,      KC_F6,   KC_BTN3,    KC_BTN3, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,   KC_F12,  \
+        KC_QWERTY, KC_COLEMAK, KC_COLEMAKDH, KC_DVORAK, KC_WORKMAN, XXXXXXX,                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MUTE, \
+        RGB_TOG,   RGB_MOD,    RGB_HUI,      RGB_SAI,   RGB_VAI,    RGB_SPI,                      AG_NORM, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRIU, KC_VOLU, \
+        KC_CAPS,   RGB_RMOD,   RGB_HUD,      RGB_SAD,   RGB_VAD,    RGB_SPD,                      AG_SWAP, XXXXXXX, XXXXXXX, XXXXXXX, KC_BRID, KC_VOLD, \
+        KC_F1,     KC_F2,      KC_F3,        KC_F4,     KC_F5,      KC_F6,   KC_BTN3,    KC_BTN3, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
                                _______,      _______,   _______,    _______, _______,    _______, _______, _______, _______, _______),
 
     /* SWITCH
      * ,-----------------------------------------.                    ,-----------------------------------------.
      * |      |      |      |      |      |      |                    |      |      |      |      |      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |      |      |      |      |      |      |                    |      |WhLeft| MsUp |WhRigh| WhUp |      |
+     * |      |      |      |      |      |      |                    |WWWFw |WhLeft| MsUp |WhRigh|      |      |
      * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-     * |      |      |      |      |      |      |-------.    ,-------|      |MsLeft|MsDown|MsRigh|WhDown|      |
+     * |      |      |      |      |      |      |-------.    ,-------|WWWBk |MsLeft|MsDown|MsRigh| WhUp |      |
      * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
-     * |      |      |      |      |      |      |-------|    |-------|      |Bttn1 |Bttn3 |Bttn2 |      |      |
+     * |      |      |      |      |      |      |-------|    |-------|      |Bttn1 |Bttn3 |Bttn2 |WhDown|      |
      * `-----------------------------------------/       /     \      \-----------------------------------------'
      *            | Alt  | GUI  | Ctrl |NUMPAD| /Space  /       \Enter \  |RAISE | Ctrl | GUI  |  Alt |
      *            |      |      |      |      |/       /         \      \ |      |      |      |      |
      *            `----------------------------------'            '------''---------------------------'
      */
     [_SWITCH] = LAYOUT( \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_WH_L, KC_MS_U, KC_WH_R, KC_WH_U, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_D, XXXXXXX, \
-        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX, KC_BTN1, KC_BTN3, KC_BTN2, XXXXXXX, XXXXXXX, \
-                          _______, _______, _______, KC_NUMPAD, _______,    _______, _______, _______, _______, _______),
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        XXXXXXX,        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC_WWW_FORWARD, KC_WH_L, KC_MS_U, KC_WH_R, XXXXXXX, XXXXXXX, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        KC_WWW_BACK,    KC_MS_L, KC_MS_D, KC_MS_R, KC_WH_U, XXXXXXX, \
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,   XXXXXXX,    XXXXXXX, XXXXXXX,        KC_BTN1, KC_BTN3, KC_BTN2, KC_WH_D, XXXXXXX, \
+                          _______, _______, _______, KC_NUMPAD, _______,    _______, _______,        _______, _______, _______),
 
     /* NUMPAD
      * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -342,32 +342,32 @@ const rgblight_segment_t PROGMEM layer_numpad_lights[] =
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] =
     RGBLIGHT_LAYERS_LIST(
 
-        layer_qwerty_lights, layer_colemak_lights, layer_colemakdh_lights,
-        layer_dvorak_lights, layer_workman_lights, layer_lower_lights,
-        layer_raise_lights, layer_adjust_lights, layer_switch_lights,
-        layer_numpad_lights);
+        layer_qwerty_lights, layer_lower_lights, layer_raise_lights,
+        layer_adjust_lights, layer_switch_lights, layer_numpad_lights,
+        layer_colemak_lights, layer_colemakdh_lights, layer_dvorak_lights,
+        layer_workman_lights);
 
 layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(
         0, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _QWERTY));
     rgblight_set_layer_state(
-        1, layer_state_cmp(state, _DEFAULTS) &&
+        6, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _COLEMAK));
     rgblight_set_layer_state(
-        2, layer_state_cmp(state, _DEFAULTS) &&
+        7, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _COLEMAKDH));
     rgblight_set_layer_state(
-        3, layer_state_cmp(state, _DEFAULTS) &&
+        8, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _DVORAK));
     rgblight_set_layer_state(
-        4, layer_state_cmp(state, _DEFAULTS) &&
+        9, layer_state_cmp(state, _DEFAULTS) &&
                layer_state_cmp(default_layer_state, _WORKMAN));
-    rgblight_set_layer_state(5, layer_state_cmp(state, _LOWER));
-    rgblight_set_layer_state(6, layer_state_cmp(state, _RAISE));
-    rgblight_set_layer_state(7, layer_state_cmp(state, _ADJUST));
-    rgblight_set_layer_state(8, layer_state_cmp(state, _SWITCH));
-    rgblight_set_layer_state(9, layer_state_cmp(state, _NUMPAD));
+    rgblight_set_layer_state(1, layer_state_cmp(state, _LOWER));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _RAISE));
+    rgblight_set_layer_state(3, layer_state_cmp(state, _ADJUST));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _SWITCH));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _NUMPAD));
 
     return state;
 }
@@ -634,11 +634,11 @@ bool oled_task_user(void) {
             oled_write(bufm, false);
             oled_write_ln_P(PSTR("|"), false);
             oled_write(bufh, false);
-            oled_write_ln_P(PSTR("|   WL MU WR WU"), false);
+            oled_write_ln_P(PSTR("|   WL MU WR"), false);
             oled_write(bufs, false);
-            oled_write_ln_P(PSTR("|   ML MD MR WD"), false);
+            oled_write_ln_P(PSTR("|   ML MD MR WU"), false);
             oled_write(bufv, false);
-            oled_write_ln_P(PSTR("|   B1 B3 B2"), false);
+            oled_write_ln_P(PSTR("|   B1 B3 B2 WD"), false);
             break;
         case _NUMPAD:
             oled_write(bufm, false);
