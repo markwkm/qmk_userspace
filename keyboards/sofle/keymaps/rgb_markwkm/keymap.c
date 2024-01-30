@@ -24,6 +24,7 @@
 // Light combinations
 
 // clang-format off
+#ifdef RGBLIGHT_ENABLE
 #define SET_INDICATORS(...)                                                   \
     {0, RGB_INDICATOR, HSV_OVERRIDE_HELP(__VA_ARGS__, INDICATOR_BRIGHTNESS)}, \
     {RGBLED_NUM, RGB_INDICATOR, __VA_ARGS__}
@@ -64,6 +65,65 @@
 
 #define SET_LAYER_ID(hsv) SET_INDICATORS(hsv), SET_UNDERGLOW(hsv)
 // SET_INDICATORS(hsv), SET_UNDERGLOW(hsv), SET_THUMB_CLUSTER(hsv)
+#endif /* RGBLIGHT_ENABLE */
+
+#ifdef RGB_MATRIX_ENABLE
+#define SET_INDICATORS(...)               \
+    rgb_matrix_set_color(0, __VA_ARGS__);
+
+#define SET_UNDERGLOW(...)                \
+    rgb_matrix_set_color(1, __VA_ARGS__); \
+    rgb_matrix_set_color(2, __VA_ARGS__); \
+    rgb_matrix_set_color(3, __VA_ARGS__); \
+    rgb_matrix_set_color(4, __VA_ARGS__); \
+    rgb_matrix_set_color(5, __VA_ARGS__); \
+    rgb_matrix_set_color(6, __VA_ARGS__);
+
+#define SET_NUMPAD(...)                    \
+    rgb_matrix_set_color(18, __VA_ARGS__); \
+    rgb_matrix_set_color(19, __VA_ARGS__); \
+    rgb_matrix_set_color(20, __VA_ARGS__); \
+    rgb_matrix_set_color(21, __VA_ARGS__); \
+    rgb_matrix_set_color(22, __VA_ARGS__); \
+    rgb_matrix_set_color(23, __VA_ARGS__); \
+    rgb_matrix_set_color(24, __VA_ARGS__); \
+    rgb_matrix_set_color(25, __VA_ARGS__); \
+    rgb_matrix_set_color(28, __VA_ARGS__); \
+    rgb_matrix_set_color(29, __VA_ARGS__); \
+    rgb_matrix_set_color(30, __VA_ARGS__); \
+    rgb_matrix_set_color(31, __VA_ARGS__);
+
+#define SET_NUMROW(...)                    \
+    rgb_matrix_set_color(11, __VA_ARGS__); \
+    rgb_matrix_set_color(12, __VA_ARGS__); \
+    rgb_matrix_set_color(21, __VA_ARGS__); \
+    rgb_matrix_set_color(22, __VA_ARGS__); \
+    rgb_matrix_set_color(31, __VA_ARGS__); \
+    rgb_matrix_set_color(32, __VA_ARGS__);
+
+#define SET_INNER_COL(...)                 \
+    rgb_matrix_set_color(32, __VA_ARGS__);  \
+    rgb_matrix_set_color(33, __VA_ARGS__);  \
+    rgb_matrix_set_color(34, __VA_ARGS__); \
+    rgb_matrix_set_color(35, __VA_ARGS__);
+
+#define SET_OUTER_COL(...)                 \
+    rgb_matrix_set_color(8, __VA_ARGS__);  \
+    rgb_matrix_set_color(9, __VA_ARGS__);  \
+    rgb_matrix_set_color(10, __VA_ARGS__); \
+    rgb_matrix_set_color(11, __VA_ARGS__);
+
+#define SET_THUMB_CLUSTER(...)             \
+    rgb_matrix_set_color(7, __VA_ARGS__);  \
+    rgb_matrix_set_color(16, __VA_ARGS__); \
+    rgb_matrix_set_color(17, __VA_ARGS__); \
+    rgb_matrix_set_color(26, __VA_ARGS__); \
+    rgb_matrix_set_color(27, __VA_ARGS__);
+// clang-format on
+
+#define SET_LAYER_ID(hsv) SET_INDICATORS(hsv), SET_UNDERGLOW(hsv)
+// SET_INDICATORS(hsv), SET_UNDERGLOW(hsv), SET_THUMB_CLUSTER(hsv)
+#endif /* RGB_MATRIX_ENABLE */
 
 enum sofle_layers {
     _DEFAULTS = 0,
@@ -378,7 +438,65 @@ void keyboard_post_init_user(void) {
     // Enable the LED layers
     rgblight_layers = my_rgb_layers;
 }
-#endif
+#endif /* RGBLIGHT_ENABLE */
+
+#ifdef RGB_MATRIX_ENABLE
+bool rgb_matrix_indicators_kb(void) {
+    if (!rgb_matrix_indicators_user()) {
+        return false;
+    }
+    switch (get_highest_layer(default_layer_state)) {
+        case _QWERTY:
+            SET_INDICATORS(RGB_RED);
+            SET_UNDERGLOW(RGB_RED);
+            break;
+        case _COLEMAK:
+            SET_INDICATORS(RGB_YELLOW);
+            SET_UNDERGLOW(RGB_YELLOW);
+            break;
+        case _COLEMAKDH:
+            SET_INDICATORS(RGB_TURQUOISE);
+            SET_UNDERGLOW(RGB_TURQUOISE);
+            break;
+        case _DVORAK:
+            SET_INDICATORS(RGB_BLUE);
+            SET_UNDERGLOW(RGB_BLUE);
+            break;
+        case _WORKMAN:
+            SET_INDICATORS(RGB_PURPLE);
+            SET_UNDERGLOW(RGB_PURPLE);
+            break;
+        default:
+            break;
+    }
+    switch (get_highest_layer(layer_state)) {
+        case _LOWER:
+            SET_INDICATORS(RGB_GREEN);
+            SET_UNDERGLOW(RGB_GREEN);
+            break;
+        case _RAISE:
+            SET_INDICATORS(RGB_TEAL);
+            SET_UNDERGLOW(RGB_TEAL);
+            break;
+        case _ADJUST:
+            SET_INDICATORS(RGB_MAGENTA);
+            SET_UNDERGLOW(RGB_MAGENTA);
+            break;
+        case _SWITCH:
+            SET_INDICATORS(RGB_GOLD);
+            SET_UNDERGLOW(RGB_GOLD);
+            break;
+        case _NUMPAD:
+            SET_INDICATORS(RGB_AZURE);
+            SET_UNDERGLOW(RGB_AZURE);
+            SET_NUMPAD(RGB_AZURE);
+            break;
+        default:
+            break;
+    }
+    return true;
+}
+#endif /* RGB_MATRIX_ENABLE */
 
 #ifdef OLED_ENABLE
 
